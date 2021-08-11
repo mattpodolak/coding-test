@@ -19,7 +19,7 @@ describe('ImageRouter', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.should.have.property('images');
+          res.body.should.have.property('images').include(...cats);
           done();
         });
     });
@@ -30,7 +30,7 @@ describe('ImageRouter', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.should.have.property('images');
+          res.body.should.have.property('images').include(...sharks);
           done();
         });
     });
@@ -41,7 +41,8 @@ describe('ImageRouter', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.should.have.property('images');
+          res.body.should.have.property('images').include(...sharks);
+          res.body.should.have.property('images').include(...cats);
           done();
         });
     });
