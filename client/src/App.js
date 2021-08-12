@@ -35,8 +35,9 @@ function App() {
       setError();
       setImages(body['images']);
     } catch (err) {
-      console.error(err);
-      setError(err);
+      setError(
+        'The cats are playing in the server room, please try that action again.'
+      );
     }
 
     setTimeout(() => setLoading(false), 500);

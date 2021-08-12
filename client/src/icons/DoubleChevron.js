@@ -10,7 +10,9 @@ export const DoubleChevron = ({ direction, width, onClick, disabled }) => {
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       onClick={!disabled ? onClick : undefined}
+      alt={`max ${direction} button`}
     >
+      <title>{`Double ${direction}`}</title>
       {direction === 'left' ? (
         <path
           strokeLinecap="round"

@@ -8,6 +8,7 @@ export const PlayPause = ({ play, width, onClick }) => {
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
     >
+      <title>{play ? 'Pause' : 'Play'}</title>
       {play ? (
         <path
           strokeLinecap="round"
