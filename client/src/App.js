@@ -39,7 +39,7 @@ function App() {
       setError(err);
     }
 
-    setLoading(false);
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
@@ -70,7 +70,7 @@ function App() {
             text="Select one of the buttons to start browsing a collection of photos."
           />
         ) : (
-          <Carousel images={images} />
+          <Carousel images={images} setImages={setImages} />
         )}
         {error && (
           <div>
