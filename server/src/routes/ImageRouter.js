@@ -2,9 +2,10 @@ import express from 'express';
 import { cats, sharks } from '../db/images';
 const router = express.Router();
 
+// TODO: store in MongoDB
 const imageURLs = {
-  cat: cats,
-  shark: sharks,
+  cats: cats,
+  sharks: sharks,
 };
 
 // @route GET api/images/url?types=cat,shark
@@ -27,7 +28,10 @@ router.get('/url', (req, res) => {
     }
   }
 
-  // randomly sort array before returning
+  // randomly sort array before returning:
+  // fulfills requirement when user requests both, and
+  // sorting on every request improves the UX as it is
+  // less repetitive for repeat users
   images.sort(() => Math.random() - 0.5);
 
   res.status(200).send({ images, types: typesList });

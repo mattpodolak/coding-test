@@ -15,7 +15,7 @@ describe('ImageRouter', () => {
     it('it should return cat images ', (done) => {
       chai
         .request(app)
-        .get('/api/images/url?types=cat')
+        .get('/api/images/url?types=cats')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -26,7 +26,7 @@ describe('ImageRouter', () => {
     it('it should return shark images ', (done) => {
       chai
         .request(app)
-        .get('/api/images/url?types=shark')
+        .get('/api/images/url?types=sharks')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -37,7 +37,7 @@ describe('ImageRouter', () => {
     it('it should return all images ', (done) => {
       chai
         .request(app)
-        .get('/api/images/url?types=cat,shark')
+        .get('/api/images/url?types=cats,sharks')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
