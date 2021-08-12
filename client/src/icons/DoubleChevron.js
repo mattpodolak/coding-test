@@ -1,37 +1,39 @@
-export const Chevron = ({ direction, width, size, onClick }) => {
-  return direction === 'left' ? (
+export const DoubleChevron = ({
+  direction,
+  width,
+  size,
+  onClick,
+  disabled,
+}) => {
+  return (
     <svg
-      className={`w-${size} h-${size}`}
+      className={
+        `w-${size} h-${size} self-center` +
+        (disabled ? ' text-gray-300' : ' cursor-pointer text-ownr-gray')
+      }
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      onClick={onClick}
+      onClick={!disabled && onClick}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={width}
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  ) : (
-    direction === 'right' && (
-      <svg
-        className={`w-${size} h-${size}`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        onClick={onClick}
-      >
+      {direction === 'left' ? (
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={width}
-          d="M9 5l7 7-7 7"
+          d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
         />
-      </svg>
-    )
+      ) : (
+        direction === 'right' && (
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={width}
+            d="M13 5l7 7-7 7M5 5l7 7-7 7"
+          />
+        )
+      )}
+    </svg>
   );
 };

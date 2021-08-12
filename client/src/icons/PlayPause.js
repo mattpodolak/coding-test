@@ -1,7 +1,7 @@
 export const PlayPause = ({ play, width, size, onClick }) => {
   return (
     <svg
-      className={`w-${size} h-${size}`}
+      className={`w-${size} h-${size} self-center cursor-pointer text-ownr-gray`}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
