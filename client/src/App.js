@@ -3,20 +3,41 @@ import { Button } from './atoms/Button';
 import { Navbar } from './organisms/Navbar';
 import { EmptyState } from './organisms/EmptyState';
 import { Loading } from './organisms/Loading';
+import { Carousel } from './organisms/Carousel';
 
-const buttonOptions = ['cats', 'sharks', 'both'];
+// TODO: load this from API
+const buttonOptions = ['cats', 'sharks'];
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState([]);
+  const [error, setError] = useState();
 
   const buttonClick = async (button) => {
     setLoading(true);
-    setActive(button);
-    const types = button === 'both' ? 'cats,sharks' : button;
+
+    var newArr = [...active];
+    if (active.includes(button)) {
+      // remove button value from active array
+      const index = newArr.indexOf(button);
+      newArr.splice(index, 1);
+      setActive(newArr);
+    } else {
+      newArr.push(button);
+      setActive(newArr);
+    }
 
     // TODO: make api request
+    try {
+      const res = await fetch(`/api/images/url?types=${newArr.join(',')}`);
+      const body = await res.json();
+      setError();
+      setImages(body['images']);
+    } catch (err) {
+      console.error(err);
+      setError(err);
+    }
 
     setLoading(false);
   };
@@ -49,7 +70,12 @@ function App() {
             text="Select one of the buttons to start browsing a collection of photos."
           />
         ) : (
-          <div>Carousel</div> // TODO: carousel component
+          <Carousel images={images} />
+        )}
+        {error && (
+          <div>
+            <p className="text-red-500 text-lg">{error}</p>
+          </div>
         )}
 
         <div className="flex space-x-2 justify-center">
@@ -58,7 +84,8 @@ function App() {
               <Button
                 buttonText={button}
                 onClick={(e) => buttonClick(button)}
-                active={active === button}
+                active={active.includes(button)}
+                key={button}
               />
             );
           })}
