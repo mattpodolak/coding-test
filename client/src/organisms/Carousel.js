@@ -83,35 +83,30 @@ export const Carousel = ({ images, setImages }) => {
         <div className="flex bg-white space-x-2 justify-center border-2 border-t-0 rounded-b-lg border-ownr-gray h-10">
           <DoubleChevron
             direction="left"
-            size={8}
             width={2}
             onClick={() => setIndex(0)}
             disabled={index === 0}
           />
           <Chevron
             direction="left"
-            size={8}
             width={2}
             onClick={() => handleClick('left')}
             disabled={index === 0}
           />
           <PlayPause
             play={play}
-            size={8}
             width={2}
             onClick={() => setPlay((play) => !play)}
           />
-          <Shuffle size={8} width={2} onClick={handleShuffle} />
+          <Shuffle width={2} onClick={handleShuffle} />
           <Chevron
             direction="right"
-            size={8}
             width={2}
             onClick={() => handleClick('right')}
             disabled={index === images.length - 1}
           />
           <DoubleChevron
             direction="right"
-            size={8}
             width={2}
             onClick={() => setIndex(images.length - 1)}
             disabled={index === images.length - 1}

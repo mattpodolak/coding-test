@@ -1,14 +1,8 @@
-export const DoubleChevron = ({
-  direction,
-  width,
-  size,
-  onClick,
-  disabled,
-}) => {
+export const DoubleChevron = ({ direction, width, onClick, disabled }) => {
   return (
     <svg
       className={
-        `w-${size} h-${size} self-center` +
+        `w-8 h-8 self-center` +
         (disabled ? ' text-gray-300' : ' cursor-pointer text-ownr-gray')
       }
       fill="none"
