@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Image } from '../atoms/Image';
 import { Chevron } from '../icons/Chevron';
 import { DoubleChevron } from '../icons/DoubleChevron';
 import { PlayPause } from '../icons/PlayPause';
@@ -7,6 +6,7 @@ import { Shuffle } from '../icons/Shuffle';
 
 export const Carousel = ({ images, setImages }) => {
   const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
   const [play, setPlay] = useState(false);
   const [playInterval, setPlayInterval] = useState();
 
@@ -26,8 +26,14 @@ export const Carousel = ({ images, setImages }) => {
   };
 
   useEffect(() => {
+    if (!isNaN(index) && Math.abs(index - prevIndex)) {
+      setTimeout(() => setPrevIndex(index), 500);
+    }
+  }, [index]);
+
+  useEffect(() => {
     if (play) {
-      setPlayInterval(setInterval(autoPlay, 3000));
+      setPlayInterval(setInterval(autoPlay, 5000));
     } else {
       clearInterval(playInterval);
     }
@@ -54,11 +60,27 @@ export const Carousel = ({ images, setImages }) => {
 
   return (
     <div className="flex justify-center">
-      <div className="max-w-lg">
-        <div style={{ transition: 'ease-in-out left 500ms' }}>
-          <Image src={images[index]} />
+      <div className="max-w-lg shadow-md">
+        <div className="relative">
+          <img
+            className={
+              `top-0 absolute rounded-t-lg z-10 ` +
+              (prevIndex > index
+                ? 'transition-transform transform scale-0 translate-x-80 duration-400'
+                : prevIndex < index
+                ? 'transition-transform transform scale-0 -translate-x-80 duration-400'
+                : 'opacity-0')
+            }
+            src={images[prevIndex]}
+            alt={`catshark carousel image ${prevIndex + 1}`}
+          />
+          <img
+            className="rounded-t-lg"
+            src={images[index]}
+            alt={`catshark carousel image ${index + 1}`}
+          />
         </div>
-        <div className="flex space-x-2 justify-center border-2 border-t-0 rounded-b-lg border-ownr-gray h-10">
+        <div className="flex bg-white space-x-2 justify-center border-2 border-t-0 rounded-b-lg border-ownr-gray h-10">
           <DoubleChevron
             direction="left"
             size={8}
