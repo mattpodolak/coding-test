@@ -10,7 +10,7 @@ export const Shuffle = ({ width, size, onClick }) => {
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
     >
-      <g stroke-width={width} stroke-linecap="round" stroke-linejoin="round">
+      <g strokeWidth={width} strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 3h5v5" />
         <path d="M4 20L21 3" />
         <path d="M21 16v5h-5" />
