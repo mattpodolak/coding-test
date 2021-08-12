@@ -20,7 +20,6 @@ jobs:
       - run: |
           cd ${{matrix.folder}}
           npm ci
-          npm run build
           npm run test
   deploy:
     runs-on: ubuntu-latest
