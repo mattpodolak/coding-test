@@ -14,6 +14,7 @@ jobs:
         with:
           branch: develop
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ''
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           justlogin: true
       - run: heroku container:login
